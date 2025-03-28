@@ -4,8 +4,6 @@ import React from 'react'
 import {DefaultValues, FieldValues, Path, SubmitHandler, useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {z, ZodType} from "zod"
-
-import { Button } from "@/components/ui/button"
 import {
     Form,
     FormControl,
@@ -13,13 +11,14 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from "./ui/form"
+import { Input } from "./ui/input"
 import Link from "next/link";
 import {FIELD_NAMES, FIELD_TYPES} from "@/constants";
 import {useRouter} from "next/navigation";
-import { useToast } from "@/hooks/use-toast"
-import FileUpload from "./FileUpload"
+import { useToast } from "../hooks/use-toast"
+import {Button} from "./ui/button";
+import FileUpload from "@/components/FileUpload";
 
 interface Props<T extends  FieldValues> {
     schema: ZodType<T>,
@@ -86,7 +85,7 @@ const AuthForm = <T extends FieldValues > ({
                                             <FormControl>
                                                 {
                                                     field.name === "universityCard" ? 
-                                                    <FileUpload 
+                                                    <FileUpload
                                                         type='image'
                                                         accept='image/*'
                                                         placeholder='Upload Your ID'
@@ -116,7 +115,7 @@ const AuthForm = <T extends FieldValues > ({
             <p className={`text-center text-base font-medium`}>
                 {type === "SIGN-IN" ? "New to BookWise? " : "Already have an account? "}
 
-                <Link className={`font-bold text-primary`} href={type === "SIGN-IN" ? "/sign-up" : "sign-in"}>
+                <Link className={`font-bold text-primary`} href={type === "SIGN-IN" ? "/sign-up" : "/sign-in"}>
                     {type === "SIGN-IN" ? "Create an account" : "Sign-in"}
                 </Link>
             </p>
