@@ -16,6 +16,15 @@ const nextConfig: NextConfig = {
                 protocol: "https",
                 hostname: "ik.imageKit.io",
                 port: ""
+            },{
+                protocol: "https",
+                hostname: "images-na.ssl-images-amazon.com",
+                port: ""
+            },
+            {
+                protocol: "https",
+                hostname: "youtu.be",
+                port: ""
             }
         ]
     }

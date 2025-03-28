@@ -1,5 +1,5 @@
 export interface Book {
-    id: number;
+    id?: number;
     title: string;
     author: string;
     rating: number;
@@ -10,6 +10,23 @@ export interface Book {
     colorUrl: string;
     coverColor: string;
     videoUrl: string;
+    summary: string;
+    isLoanedBook?: boolean;
+    createdAt?: Date
+}
+
+export interface BookData {
+    id: number;
+    title: string;
+    author: string;
+    genre: string;
+    rating: float;
+    total_copies: number;
+    available_copies: number;
+    description: string;
+    color: string;
+    cover: string;
+    video: string;
     summary: string;
     isLoanedBook?: boolean;
 }
@@ -30,7 +47,7 @@ export interface BookParams {
     totalCopies: number;
     availableCopies: number;
     description: string;
-    colorUrl: string;
+    coverUrl: string;
     coverColor: string;
     videoUrl: string;
     summary: string;

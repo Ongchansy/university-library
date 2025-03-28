@@ -1,5 +1,5 @@
 import React from 'react'
-import {Book} from "@/type";
+import {BookData} from "@/type";
 import Link from "next/link";
 import BookCover from "@/components/BookCover";
 import {cn} from "@/lib/utils";
@@ -9,18 +9,11 @@ import {Button} from "@/components/ui/button";
 const BookCard = ({
                       id,
                       title,
-                      author,
-                      rating,
                       genre,
-                      total_copies,
-                      available_copies,
-                      description,
                       color,
                       cover,
-                      video,
-                      summary,
                       isLoanedBook,
-                  }:Book) => {
+                  }:BookData) => {
     return (
         <li className={cn(
             isLoanedBook && "xs:w-52 w-full"

@@ -1,6 +1,5 @@
 "use client"
 
-import { title } from "process"
 import {z}  from "zod"
 
 export const SignUpSchema = z.object({
@@ -21,8 +20,9 @@ export const BookSchema =  z.object({
     description: z.string().trim().min(3).max(100),
     author: z.string().trim().min(3).max(100),
     genre: z.string().trim().min(3).max(100),
-    rating: z.number().min(1).max(5),
-    totalCopy: z.coerce.number().int().positive().lte(10000),
+    rating: z.number().min(1).max(5).positive(),
+    totalCopies: z.coerce.number().int().positive().lte(10000).positive(),
+    availableCopies: z.coerce.number().int().positive().lte(10000).positive(),
     coverUrl: z.string().nonempty("Cover URL is required"),
     coverColor: z.string().trim().regex(/^#[0-9a-f]{6}$/i, "Invalid color code"),
     videoUrl: z.string().nonempty("Video URL is required"),

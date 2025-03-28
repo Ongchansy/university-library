@@ -1,10 +1,23 @@
 import React from 'react'
-import {Book} from "@/type";
 import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import BookCover from "@/components/BookCover";
 
+interface BookOverviewProps {
+    title: string;
+    author: string;
+    rating: number;
+    total_copies: number;
+    available_copies: number;
+    description: string;
+    color: string;
+    cover: string;
+    genre: string;
+    userId?: string;
+}
+
 const BookOverview = ({
+                        
                           title,
                           author,
                           rating,
@@ -13,8 +26,9 @@ const BookOverview = ({
                           description,
                           color,
                           cover,
-                          genre
-}:Book) => {
+                          genre,
+}
+:BookOverviewProps) => {
     return (
         <section className={`book-overview`}>
             <div className={`flex flex-1 flex-col gap-5`}>
