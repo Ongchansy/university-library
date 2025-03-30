@@ -1,15 +1,17 @@
 'use client';
 
+import { books } from '@/app/admin/books/_dummy/data';
 import BookList from '@/components/BookList';
 import { Input } from '@/components/ui/input';
-import { sampleBooks } from '@/constants';
 import React, { useState } from 'react';
 
 const Page = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
+
+
   // Filter books based on title, author, or genre
-  const filteredBooks = sampleBooks.filter((book) =>
+  const filteredBooks = books.filter((book) =>
     book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
     book.genre.toLowerCase().includes(searchQuery.toLowerCase())
@@ -36,7 +38,7 @@ const Page = () => {
       <div>
         <BookList
           title="Latest Books"
-          books={filteredBooks} // Show filtered books
+          bookList={filteredBooks} // Show filtered books
           containerClassName="mt-28"
         />
       </div>

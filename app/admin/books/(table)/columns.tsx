@@ -1,8 +1,6 @@
 "use client"
 
-import {
-  createColumnHelper,
-} from '@tanstack/react-table'
+import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -12,28 +10,29 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-
 import Link from "next/link"
-import { BookData } from '@/type'
+import { BookData } from "@/type"
 
-const columnHelper = createColumnHelper<BookData>()
-
-export const columns =  [
-  columnHelper.accessor("title", {
-    header: () => <span>Title</span>,
-  }),
-  columnHelper.accessor("author", {
-    header: () => <span>Author</span>,
-  }),
-  columnHelper.accessor("genre", {
-    header: () => <span>Genre</span>,
-  }),
-  columnHelper.accessor("createdAt", {
-    header: "Created At",
-    cell: ({ row }) => row.original.createdAt ? row.original.createdAt.toLocaleDateString() : "N/A",
-  }),
-  columnHelper.display({
+export const columns: ColumnDef<BookData>[] = [
+  {
+    accessorKey: "title",
+    header: () => <div>Title</div>,
+  },
+  {
+    accessorKey: "author",
+    header: "Author",
+  },
+  {
+    accessorKey: "genre",
+    header: "Genre",
+  },
+  {
+    accessorKey: "createdAt",
+    cell: ({ row }) => (row.original.createdAt ? row.original.createdAt.toLocaleDateString() : "N/A"),
+  },
+  {
     id: "actions",
+    header: () => <div>Action</div>,
     cell: ({ row }) => {
       return (
         <div className="">
@@ -57,5 +56,5 @@ export const columns =  [
         </div>
       )
     },
-  }),
+  },
 ]

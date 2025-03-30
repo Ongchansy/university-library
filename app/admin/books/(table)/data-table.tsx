@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { BookData } from "@/type";
 
 interface DataTableProps {
-    columns: ColumnDef<BookData | unknown[]>[]; // Ensures the columns are correctly typed for BookData
+    columns: ColumnDef<BookData>[]; // Ensures the columns are correctly typed for BookData
     data: BookData[];
 }
 

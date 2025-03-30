@@ -1,17 +1,17 @@
 import React from 'react'
 import BookOverview from "@/components/BookOverview";
 import BookList from "@/components/BookList";
-import {sampleBooks} from "@/constants";
+import { books } from '../admin/books/_dummy/data';
 
 
 const Page = async () => {
     return (
         <>
-            <BookOverview {...sampleBooks[0]} />
+            <BookOverview {...books[0]} />
 
             <BookList
                 title="Latest Books"
-                books={sampleBooks}
+                bookList={books}
                 containerClassName="mt-28"
             />
         </>

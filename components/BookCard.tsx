@@ -10,8 +10,8 @@ const BookCard = ({
                       id,
                       title,
                       genre,
-                      color,
-                      cover,
+                      coverUrl,
+                      coverColor,
                       isLoanedBook,
                   }:BookData) => {
     return (
@@ -24,7 +24,7 @@ const BookCard = ({
                       isLoanedBook && "w-full flex flex-col items-center"
                   )}
             >
-                <BookCover coverColor={color}  coverImage={cover} />
+                <BookCover coverColor={coverColor}  coverImage={coverUrl} />
 
                 <div
                     className={cn(

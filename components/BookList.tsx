@@ -4,13 +4,13 @@ import {BookData} from "@/type";
 
 interface Props {
     title?: string
-    books: BookData[],
+    bookList: BookData[] ,
     containerClassName?: string
 }
 
 const BookList = ({
     title,
-    books,
+    bookList,
     containerClassName
 }: Props) => {
     return (
@@ -19,7 +19,7 @@ const BookList = ({
 
             <ul className={`book-list`}>
                 {
-                    books.map((book: BookData) => (
+                    bookList.map((book: BookData) => (
                         <BookCard key={book.id} {...book} />
                     ))
                 }

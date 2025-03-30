@@ -2,33 +2,20 @@ import React from 'react'
 import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import BookCover from "@/components/BookCover";
-
-interface BookOverviewProps {
-    title: string;
-    author: string;
-    rating: number;
-    total_copies: number;
-    available_copies: number;
-    description: string;
-    color: string;
-    cover: string;
-    genre: string;
-    userId?: string;
-}
+import { BookData } from '@/type';
 
 const BookOverview = ({
-                        
-                          title,
-                          author,
-                          rating,
-                          total_copies,
-                          available_copies,
-                          description,
-                          color,
-                          cover,
-                          genre,
+    title,
+    author,
+    genre,
+    rating,
+    totalCopies,
+    availableCopies,
+    description,
+    coverUrl,
+    coverColor,
 }
-:BookOverviewProps) => {
+:BookData) => {
     return (
         <section className={`book-overview`}>
             <div className={`flex flex-1 flex-col gap-5`}>
@@ -48,10 +35,10 @@ const BookOverview = ({
 
                     <div className={`book-copies`}>
                         <p>
-                            Total Books: <span className={`font-semibold text-light-200`}>{total_copies}</span>
+                            Total Books: <span className={`font-semibold text-light-200`}>{totalCopies}</span>
                         </p>
                         <p>
-                            Available Books: <span className={`font-semibold text-light-200`}>{available_copies}</span>
+                            Available Books: <span className={`font-semibold text-light-200`}>{availableCopies}</span>
                         </p>
                     </div>
 
@@ -69,15 +56,15 @@ const BookOverview = ({
                     <BookCover
                         variant="wide"
                         className="z-10"
-                        coverColor={color}
-                        coverImage={cover}
+                        coverColor={coverColor}
+                        coverImage={coverUrl}
                     />
 
                     <div className={`absolute left-16 top-10 rotate-12 opacity-40`}>
                         <BookCover
                             variant="wide"
-                            coverColor={color}
-                            coverImage={cover}
+                            coverColor={coverColor}
+                            coverImage={coverUrl}
                         />
                     </div>
                 </div>

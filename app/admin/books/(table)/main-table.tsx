@@ -32,7 +32,7 @@ export default async function MainTable() {
           Create a new Book
         </Link>
       </div>
-      <DataTable columns={columns as BookData[]} data={bookData} />
+      <DataTable columns={columns} data={bookData} />
     </div>
   );
 }
