@@ -1,5 +1,5 @@
 export interface Book {
-    id?: number;
+    id?:string;
     title: string;
     author: string;
     rating: number;
@@ -7,7 +7,7 @@ export interface Book {
     totalCopies: number;
     availableCopies: number;
     description: string;
-    colorUrl: string;
+    colorUrl?: string;
     coverColor: string;
     videoUrl: string;
     summary: string;
@@ -16,19 +16,20 @@ export interface Book {
 }
 
 export interface BookData {
-    id: number;
+    id: string;
     title: string;
     author: string;
     genre: string;
-    rating: float;
-    total_copies: number;
-    available_copies: number;
+    rating: number; // Changed from float to number
+    totalCopies: number; // Fixed casing
+    availableCopies: number;
     description: string;
-    color: string;
-    cover: string;
-    video: string;
+    coverUrl: string; // Fixed casing
+    coverColor: string; // Fixed casing
+    videoUrl: string; // Fixed casing
     summary: string;
     isLoanedBook?: boolean;
+    createdAt?: Date | null; // Fixed casing
 }
 
 export interface Credentials {

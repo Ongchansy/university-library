@@ -25,6 +25,25 @@ const nextConfig: NextConfig = {
                 protocol: "https",
                 hostname: "youtu.be",
                 port: ""
+            },{
+                protocol: "https",
+                hostname: "i.pravatar.cc",
+                port: ""
+            },
+            {
+                protocol: "https",
+                hostname: "img.youtube.com",
+                port: ""
+            },
+            {
+                protocol: "https",
+                hostname: "i.ytimg.com",
+                port: ""
+            },
+            {
+                protocol: "https",
+                hostname: "lh3.googleusercontent.com",
+                port: ""
             }
         ]
     }
