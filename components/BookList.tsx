@@ -4,7 +4,7 @@ import {BookData} from "@/type";
 
 interface Props {
     title?: string
-    bookList: BookData[] ,
+    bookList: BookData[] | undefined,
     containerClassName?: string
 }
 
@@ -19,7 +19,7 @@ const BookList = ({
 
             <ul className={`book-list`}>
                 {
-                    bookList.map((book: BookData) => (
+                    bookList?.map((book: BookData) => (
                         <BookCard key={book.id} {...book} />
                     ))
                 }

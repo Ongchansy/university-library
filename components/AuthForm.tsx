@@ -34,7 +34,6 @@ const AuthForm = <T extends FieldValues > ({
         resolver: zodResolver(schema),
         defaultValues: defaultValue as DefaultValues<T>,
     })
-
     const handleSubmit: SubmitHandler<T>  = async  (data) => {
         const result = await onSubmit(data)
         if (result.success) {
@@ -74,30 +73,26 @@ const AuthForm = <T extends FieldValues > ({
                                     name={field as Path<T>}
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className={`capitalize`}>{FIELD_NAMES[field.name as keyof typeof FIELD_NAMES ]}</FormLabel>
+                                            <FormLabel className="capitalize">
+                                                {FIELD_NAMES[field.name as keyof typeof FIELD_NAMES]}
+                                            </FormLabel>
                                             <FormControl>
-                                                {
-                                                    field.name === "universityCard" ? 
-                                                    <FileUpload
-                                                        type='image'
-                                                        accept='image/*'
-                                                        placeholder='Upload Your ID'
-                                                        folder='ids'
-                                                        variant='dart'
-                                                        onFileChange={field.onChange} 
-                                                    /> : 
+                                                {field.name === "universityCard" ? (
+                                                    <FileUpload onUpload={field.onChange} />
+                                                    
+                                                ) : (
                                                     <Input
-                                                        className={`form-input`}
+                                                        className="form-input"
                                                         required
-                                                        type={FIELD_TYPES[field.name as keyof  typeof  FIELD_TYPES]}  
-                                                        {...field} 
+                                                        type={FIELD_TYPES[field.name as keyof typeof FIELD_TYPES]}
+                                                        {...field}
                                                     />
-                                                }
+                                                )}
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
                                     )}
-                                />
+/>
                             )
                         })
                     }

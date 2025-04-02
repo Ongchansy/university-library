@@ -18,7 +18,7 @@ export function DataTable({ columns, data }: DataTableProps) {
     });
 
     return (
-        <div>
+        <div className="w-full">
             {/* Make table scrollable on small screens */}
             <div className="overflow-x-auto">
                 <Table>

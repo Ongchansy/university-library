@@ -4,7 +4,7 @@ export default function DashboardCards() {
         {cards.map((card, index) => (
           <div
             key={index}
-            className="md:w-96 w-full p-4  rounded-2xl shadow-sm border flex flex-col"
+            className=" w-full p-4  rounded-2xl shadow-sm border flex flex-col"
           >
             <div className="flex justify-between items-center  text-sm">
               <span>{card.title}</span>

@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { format } from "date-fns";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
 import { BookData } from "@/type"
+import { deleteBook } from '../action/book';
 
 export const columns: ColumnDef<BookData>[] = [
   {
@@ -28,12 +30,16 @@ export const columns: ColumnDef<BookData>[] = [
   },
   {
     accessorKey: "createdAt",
-    cell: ({ row }) => (row.original.createdAt ? row.original.createdAt.toLocaleDateString() : "N/A"),
+    cell: ({ row }) => {
+      const date = new Date(row.original.createdAt ? row.original.createdAt : "N/A" );
+      return format(date, "dd/MM/yyyy"); // Outputs: 01/04/2024
+    },
   },
   {
     id: "actions",
     header: () => <div>Action</div>,
     cell: ({ row }) => {
+      const id = row.original.id;
       return (
         <div className="">
           <DropdownMenu>
@@ -50,7 +56,11 @@ export const columns: ColumnDef<BookData>[] = [
                     Edit
                   </DropdownMenuItem>
                 </Link>
-              <DropdownMenuItem>Remove</DropdownMenuItem>
+              <DropdownMenuItem 
+                onClick={ () => {
+                  if(id) deleteBook(id)
+                }}
+              >Remove</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

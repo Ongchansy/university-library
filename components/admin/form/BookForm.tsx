@@ -1,4 +1,5 @@
 import { createBook } from '@/app/admin/books/action/book';
+import FileUpload from '@/components/FileUpload';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -13,7 +14,7 @@ const BookForm = () => {
 
     const {toast} = useToast()
 
-    const {handleSubmit,register,formState:{errors}} = useForm({
+    const {handleSubmit,register,formState:{errors},setValue,reset} = useForm({
         defaultValues: {
             title: "",
             description: "",
@@ -38,6 +39,7 @@ const BookForm = () => {
                 title: "Success",
                 description: "You have successfully created a book!",
             })
+            reset()
         }
         else{
             toast({
@@ -95,7 +97,7 @@ const BookForm = () => {
 
                 <div>
                     <Label>Cover URL</Label>
-                    <Input {...register('coverUrl',{required: true})} />
+                    <FileUpload onUpload={(fileUrl: string) => setValue("coverUrl", fileUrl)} />
                     {errors.coverUrl && <p className='text-red-500 text-sm'>Cover URL is required.</p>}
                 </div>
 

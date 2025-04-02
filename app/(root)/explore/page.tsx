@@ -1,17 +1,26 @@
 'use client';
 
-import { books } from '@/app/admin/books/_dummy/data';
+import React, { useEffect, useState } from 'react';
 import BookList from '@/components/BookList';
 import { Input } from '@/components/ui/input';
-import React, { useState } from 'react';
+import { getBooks } from './action';
+import { BookData } from '@/type';
 
 const Page = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [books, setBooks] = useState<BookData[]>();
 
+  useEffect(() => {
+    const fetchBooks = async () => {
+      const data = await getBooks();
+      setBooks(data);
+    };
 
+    fetchBooks();
+  }, []);
 
   // Filter books based on title, author, or genre
-  const filteredBooks = books.filter((book) =>
+  const filteredBooks = books && books.filter((book) =>
     book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
     book.genre.toLowerCase().includes(searchQuery.toLowerCase())

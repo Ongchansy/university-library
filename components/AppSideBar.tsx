@@ -68,7 +68,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
-                <SidebarMenuItem key={item.title} className="p-2">
+                <SidebarMenuItem key={item.title} className="p-2 ">
                   <SidebarMenuButton asChild>
                     <Link prefetch={true} href={item.url}>
                       <item.icon />

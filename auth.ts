@@ -4,6 +4,8 @@ import {db} from "@/database/drizzle";
 import {users} from "@/database/schema";
 import {eq} from "drizzle-orm";
 import {compare} from "bcryptjs"
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     session:{
@@ -57,5 +59,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
             return session
         }
-    }
+    },
+    secret: process.env.NEXTAUTH_SECRET,
 })

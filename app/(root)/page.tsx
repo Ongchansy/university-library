@@ -1,17 +1,20 @@
 import React from 'react'
 import BookOverview from "@/components/BookOverview";
 import BookList from "@/components/BookList";
-import { books } from '../admin/books/_dummy/data';
+import { db } from '@/database/drizzle';
+import { books } from '@/database/schema';
 
 
 const Page = async () => {
+    const data = await  db.select().from(books)
+    
     return (
         <>
-            <BookOverview {...books[0]} />
+            <BookOverview {...data[0]} />
 
             <BookList
                 title="Latest Books"
-                bookList={books}
+                bookList={data}
                 containerClassName="mt-28"
             />
         </>

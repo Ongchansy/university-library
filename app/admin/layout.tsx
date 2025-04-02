@@ -31,7 +31,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
     <SidebarProvider>
     <AppSidebar />
     <SidebarInset>
-      <header className="flex h-16 justify-between shrink-0 items-center gap-2 border-b px-4">
+      <header className="flex w-full h-16 justify-between items-center gap-2 border-b px-4">
         <div className="flex items-center gap-2">
           <SidebarTrigger className="-ml-1" />
           <Separator orientation="vertical" className="mr-2 h-4" />
@@ -43,7 +43,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
       </div>
       </header>
       
-      <main className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min bg-[#F8F8FF]">
+      <main className="min-h-screen w-full flex-1 rounded-xl bg-muted/50 bg-[#F8F8FF]">
           {children}
       </main>
       

@@ -44,6 +44,14 @@ const nextConfig: NextConfig = {
                 protocol: "https",
                 hostname: "lh3.googleusercontent.com",
                 port: ""
+            },
+            {
+                protocol:"https",
+                hostname:"image-upload-ytw8.onrender.com"
+            },
+            {
+                protocol: "https",
+                hostname:"res.cloudinary.com"
             }
         ]
     }

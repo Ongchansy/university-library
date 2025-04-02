@@ -32,7 +32,9 @@ export default async function MainTable() {
           Create a new Book
         </Link>
       </div>
-      <DataTable columns={columns} data={bookData} />
+      <div className="w-full overflow-x-auto">
+        <DataTable columns={columns} data={bookData} />
+      </div>
     </div>
   );
 }
