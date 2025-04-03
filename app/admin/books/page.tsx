@@ -1,8 +1,13 @@
 import { SearchForm } from '@/components/search-form'
-import React from 'react'
+import React, { Suspense } from 'react'
 import MianTable from './(table)/main-table'
+import { SkeletonTable } from '@/components/SkeletonTable'
+import { columns } from './(table)/columns'
+import { getBook } from '@/lib/action/book'
+import { BookData } from '@/type'
 
-const page = () => {
+const page = async () => {
+  const rawBookData = await getBook()
   return (
     <div className="p-4 overflow-auto">
         <div className='flex justify-between items-center mb-4 mt-2'>
@@ -14,7 +19,9 @@ const page = () => {
         </div>
 
         <div>
+          <Suspense fallback={<SkeletonTable<BookData> columns={columns} rows={rawBookData.length} />}>
             <MianTable />
+          </Suspense>
         </div>
     </div>
   )

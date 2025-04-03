@@ -1,8 +1,13 @@
 import { SearchForm } from '@/components/search-form'
-import React from 'react'
+import React, { Suspense } from 'react'
 import MianTable from './(table)/main-table'
+import { SkeletonTable } from '@/components/SkeletonTable'
+import { User } from '@/type'
+import { columns } from './(table)/columns'
+import { getUser } from '@/lib/action/user'
 
-const page = () => {
+const page = async () => {
+  const rawUser = await getUser()
   return (
     <div className="p-4">
         <div className='flex justify-between items-center mb-4 mt-2'>
@@ -14,7 +19,9 @@ const page = () => {
         </div>
 
         <div>
+          <Suspense fallback={<SkeletonTable<User> columns={columns} rows={rawUser.length} />}>
             <MianTable />
+          </Suspense>
         </div>
     </div>
   )

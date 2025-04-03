@@ -3,6 +3,7 @@ import FileUpload from '@/components/FileUpload';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { createBook } from '@/lib/action/book';
 import { BookSchema } from '@/lib/validation';
@@ -51,8 +52,8 @@ const BookForm = () => {
         }
     }
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-2 gap-4">
+        <form onSubmit={handleSubmit(onSubmit)} className='max-w-[900px] mx-auto' >
+            <div className="grid gap-8 ">
 
                 <div>
                     <Label>Book Title</Label>
@@ -62,7 +63,7 @@ const BookForm = () => {
 
                 <div>
                     <Label>Description</Label>
-                    <Input {...register('description',{required: true})} />
+                    <Textarea rows={8} {...register('description',{required: true})} />
                     {errors.description && <p className='text-red-500 text-sm'>Description is required.</p>}
                 </div>
 
@@ -116,7 +117,7 @@ const BookForm = () => {
 
                 <div>
                     <Label>Summary</Label>
-                    <Input {...register('summary',{required: true})} />
+                    <Textarea rows={8} {...register('summary',{required: true})} />
                     {errors.summary && <p className='text-red-500 text-sm'>Summary is required.</p>}
                 </div>
             </div>

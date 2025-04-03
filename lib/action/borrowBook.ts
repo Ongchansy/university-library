@@ -72,3 +72,9 @@ export const handleBorrow = async ({ bookId, userId }: BorrowBookParam) => {
         console.error("Error: " + response.message);
     }
 };
+
+
+export const getBorrowRecord = async () => {
+    const data = db.select().from(borrowRecords)
+    return data
+}

@@ -34,6 +34,7 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
   })
 
+
   return (
     <div>
         <div className="overflow-x-auto table-auto">

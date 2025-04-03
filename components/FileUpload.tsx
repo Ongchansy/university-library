@@ -4,41 +4,56 @@ import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 interface FileUploadProps {
-  onUpload?: (fileUrl: string) => void; // Pass fileUrl instead of File object
+  onUpload?: (fileUrl: string) => void;
 }
 
 const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
 
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
       if (acceptedFiles.length === 0) return;
 
       const selectedFile = acceptedFiles[0];
-
+      setUploadProgress(0);
+      setIsUploading(true);
 
       // Prepare file for upload
       const formData = new FormData();
       formData.append("file", selectedFile);
 
       try {
-        const response = await fetch("https://image-upload-ytw8.onrender.com/upload", {
-          method: "POST",
-          body: formData,
+        const xhr = new XMLHttpRequest();
+        
+        xhr.upload.addEventListener("progress", (event) => {
+          if (event.lengthComputable) {
+            const progress = Math.round((event.loaded / event.total) * 100);
+            setUploadProgress(progress);
+          }
         });
 
-        if (!response.ok) {
-          throw new Error(`Upload failed: ${response.statusText}`);
-        }
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4) {
+            setIsUploading(false);
+            if (xhr.status === 200) {
+              const data = JSON.parse(xhr.responseText);
+              setUploadedUrl(data.url);
+              if (onUpload) {
+                onUpload(data.url);
+              }
+            } else {
+              console.error("Upload failed:", xhr.statusText);
+            }
+          }
+        };
 
-        const data = await response.json(); // Get uploaded file URL
-        setUploadedUrl(data.url);
-
-        if (onUpload) {
-          onUpload(data.url); // Send URL to parent component (BookForm)
-        }
+        xhr.open("POST", "https://image-upload-ytw8.onrender.com/upload");
+        xhr.send(formData);
 
       } catch (error) {
+        setIsUploading(false);
         console.error("Error uploading file:", error);
       }
     },
@@ -58,11 +73,29 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
         <p>Drag & drop a file here, or click to select a file</p>
       </div>
 
-      {uploadedUrl && (
+      {isUploading && (
+        <div className="mt-4 w-full bg-gray-200 rounded-full h-2.5">
+          <div 
+            className="bg-blue-600 h-2.5 rounded-full" 
+            style={{ width: `${uploadProgress}%` }}
+          ></div>
+          <p className="text-sm text-gray-600 mt-1">
+            Uploading... {uploadProgress}%
+          </p>
+        </div>
+      )}
+
+      {uploadedUrl && !isUploading && (
         <div className="mt-4">
-          <p>File uploaded successfully!</p>
+          <p className="text-green-600 mb-2">File uploaded successfully!</p>
           <a href={uploadedUrl} target="_blank" rel="noopener noreferrer">
-            <Image src={uploadedUrl} alt="Uploaded" height={300} width={400} />
+            <Image 
+              src={uploadedUrl} 
+              alt="Uploaded" 
+              height={300} 
+              width={400} 
+              className="max-h-60 object-contain border rounded"
+            />
           </a>
         </div>
       )}

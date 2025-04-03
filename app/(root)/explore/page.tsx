@@ -1,30 +1,42 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState, useDeferredValue } from 'react';
 import BookList from '@/components/BookList';
 import { Input } from '@/components/ui/input';
 import { getBooks } from './action';
 import { BookData } from '@/type';
+import Loading from '@/components/loading';
 
-const Page = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [books, setBooks] = useState<BookData[]>();
+// Wrap the book list fetching in a component that can suspend
+const BookListWithData = ({ searchQuery }: { searchQuery: string }) => {
+  const [books, setBooks] = useState<BookData[]>([]);
+  const deferredQuery = useDeferredValue(searchQuery);
 
   useEffect(() => {
     const fetchBooks = async () => {
       const data = await getBooks();
       setBooks(data);
     };
-
     fetchBooks();
   }, []);
 
-  // Filter books based on title, author, or genre
-  const filteredBooks = books && books.filter((book) =>
-    book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    book.genre.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredBooks = books.filter((book) =>
+    book.title.toLowerCase().includes(deferredQuery.toLowerCase()) ||
+    book.author.toLowerCase().includes(deferredQuery.toLowerCase()) ||
+    book.genre.toLowerCase().includes(deferredQuery.toLowerCase())
   );
+
+  return (
+    <BookList
+      title={deferredQuery ? "Search Results" : "Latest Books"}
+      bookList={filteredBooks}
+      containerClassName="mt-28"
+    />
+  );
+};
+
+const Page = () => {
+  const [searchQuery, setSearchQuery] = useState('');
 
   return (
     <div className="p-4 text-white">
@@ -44,13 +56,11 @@ const Page = () => {
         </div>
       </div>
 
-      <div>
-        <BookList
-          title="Latest Books"
-          bookList={filteredBooks} // Show filtered books
-          containerClassName="mt-28"
-        />
-      </div>
+      <Suspense fallback={
+          <Loading />
+      }>
+        <BookListWithData searchQuery={searchQuery} />
+      </Suspense>
     </div>
   );
 };

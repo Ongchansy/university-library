@@ -1,8 +1,13 @@
 import { SearchForm } from '@/components/search-form'
-import React from 'react'
+import React, { Suspense } from 'react'
 import MainTable from './(table)/main-table'
+import { SkeletonTable } from '@/components/SkeletonTable'
+import { BorrowBookModel } from '@/type'
+import { columns } from './(table)/columns'
+import { getBorrowRecord } from '@/lib/action/borrowBook'
 
-const page = () => {
+const page = async () => {
+  const rawBorrowRecord = await getBorrowRecord()
   return (
     <div className="p-4 overflow-auto">
             <div className='flex justify-between items-center mb-4 mt-2'>
@@ -14,7 +19,9 @@ const page = () => {
             </div>
     
             <div>
+              <Suspense fallback={<SkeletonTable<BorrowBookModel> columns={columns} rows={rawBorrowRecord.length} />}>
                 <MainTable />
+              </Suspense>
             </div>
     </div>
   )

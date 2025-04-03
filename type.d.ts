@@ -44,6 +44,17 @@ export interface BorrowBookModel {
     status: "BORROWED" | "RETURNED"
 }
 
+export type User = {
+    id: string
+    fullName: string,
+    email: string,
+    password: string,
+    role: string,
+    universityId: string,
+    universityCard: string,
+    createdAt: Date,
+  }
+
 
 export interface Credentials {
     fullName: string;

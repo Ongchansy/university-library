@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/admin/books/edit/[id]/page.jsx", "app/(root)/users/[id]/page.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/admin/books/edit/[id]/page.jsx", "app/(root)/users/[id]/page.tsx", "components/SkeletonTable.tsx"],
   "exclude": ["node_modules"]
 }
