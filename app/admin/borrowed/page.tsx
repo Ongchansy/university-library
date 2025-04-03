@@ -1,10 +1,21 @@
+import { SearchForm } from '@/components/search-form'
 import React from 'react'
+import MainTable from './(table)/main-table'
 
 const page = () => {
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-semibold text-gray-900">Borrowed Requests</h1>
-      <p className="mt-2 text-sm text-gray-600">These are the requests that have been borrowed.</p>
+    <div className="p-4 overflow-auto">
+            <div className='flex justify-between items-center mb-4 mt-2'>
+                <div>
+                    <h1 className="text-2xl font-semibold text-sidebar-foreground">Users Management</h1>
+                </div>
+    
+                <SearchForm />
+            </div>
+    
+            <div>
+                <MainTable />
+            </div>
     </div>
   )
 }

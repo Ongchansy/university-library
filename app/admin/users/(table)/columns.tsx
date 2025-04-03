@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { Trash2 } from "lucide-react"
 import { handleDelete } from "../actioin"
+import Image from "next/image"
 
 export type User = {
   id: string
@@ -18,6 +19,14 @@ export type User = {
 export type Users = User[]
 
 export const columns: ColumnDef<User>[] = [
+  {
+    accessorKey: "Profile",
+    cell({row}) {
+      const profile = row.original.universityCard
+
+      return <Image src={profile} alt={profile} height={40} width={40} />
+    },
+  },
   {
     accessorKey: "fullName",
     header: "Full Name",

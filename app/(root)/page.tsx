@@ -6,7 +6,7 @@ import { books } from '@/database/schema';
 
 
 const Page = async () => {
-    const data = await  db.select().from(books)
+    const data = await db.select().from(books)
     
     return (
         <>

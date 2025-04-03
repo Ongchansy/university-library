@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Logout from "./Logout";
 
 interface User {
+    id:string
     name: string;
 }
 
@@ -30,13 +31,12 @@ const Header: React.FC<HeaderProps> = ({ sessionToken }) => {
                 {sessionToken ? (
                     <div className="flex gap-8 items-center">
                         <div>
-                            <Link className="flex items-center gap-1" href={`/my-profile`}>
+                            <Link className="flex items-center gap-1" href={`/users/${sessionToken.user.id}`}>
                                 <Avatar>
                                     <AvatarFallback className="text-light-200 uppercase bg-teal-600">
                                         {sessionToken.user.name?.slice(0, 2)}
                                     </AvatarFallback>
                                 </Avatar>
-                                <p className="capitalize">{sessionToken.user.name}</p>
                             </Link>
                         </div>
 

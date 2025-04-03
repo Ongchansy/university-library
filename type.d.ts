@@ -16,7 +16,7 @@ export interface Book {
 }
 
 export interface BookData {
-    id?: string;
+    id?: string | undefined;
     title: string;
     author: string;
     genre: string;
@@ -31,6 +31,19 @@ export interface BookData {
     isLoanedBook?: boolean;
     createdAt?: Date | null; // Fixed casing
 }
+
+export interface BorrowBookModel {
+    id?: string
+    bookId?: string
+    borrowDate: Date | null
+    dueDate: string
+    returnDate?: string | null
+    title: string
+    author: string
+    coverUrl: string
+    status: "BORROWED" | "RETURNED"
+}
+
 
 export interface Credentials {
     fullName: string;
@@ -52,4 +65,9 @@ export interface BookParams {
     coverColor: string;
     videoUrl: string;
     summary: string;
+}
+
+export interface BorrowBookParam {
+    userId: string
+    bookId: string
 }
